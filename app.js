@@ -1,3 +1,17 @@
+setTimeout(function(){
+
+    let headTag = document.head;
+
+    let linkTag = document.createElement('link');
+        linkTag.rel = 'stylesheet';
+        linkTag.href = './styles.css';
+
+    headTag.insertAdjacentElement('beforeend', linkTag);
+
+}, 1000);
+
+
+
 (async function(){
                 const URL_currencies = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json';
                 let curencies = await fetch(URL_currencies);
@@ -55,8 +69,15 @@
                         else{
                             continue;
                         }
-                } 
-                    document.write(`<p class='content'>${countries_true[k].name}(${countries_true[k].valuta})        Курс: ${cur};    Дата: ${date}</p><br>`);
+                    } 
+                    document.write(`<p class='content' id='parent${k}'>${countries_true[k].name}(${countries_true[k].valuta})        Курс: ${cur};    Дата: ${date}</p><br>`);
+                    let parent = document.querySelector(`#parent${k}`);
+                    let divChilde = document.createElement('div');
+                    divChilde.id = `div${k}`;
+                    parent.appendChild(divChilde);
+                    let parentDiv = document.getElementById(`div${k}`);
+                    let imgChild = document.createElement('img');
+                    imgChild.src = countries_true[k].flag;
+                    parentDiv.appendChild(imgChild);
                 }
             })();
-
